@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificação de Carne</title>
+</head>
+<body>
+    <h1>Envie Carne para Análise</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file">Escolha uma imagem (jpg):</label><br>
+        <p><input type="file" name="file" accept=".jpg" required></p>
+        <br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    {% if result %}
+        {% if result.error %}
+            <p>{{ result.error }}</p>
+        {% else %}
+            <h2>Resultado da Classificação:</h2>
+            <p>Imagem Submetida:</p>
+            <img src="{{ url_for('uploaded_file', filename=result.image_filename) }}" alt="Imagem Submetida" width="200">
+            <p>Resultado:</p>
+            <p>{{ result.classification }}</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
