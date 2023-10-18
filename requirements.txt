@@ -9,7 +9,7 @@ MarkupSafe==2.1.3
 numpy
 packaging==23.2
 pickleshare==0.7.5
-Pillow==10.0.1
+Pillow
 scikit-learn
 scipy==1.11.3
 threadpoolctl==3.2.0
