@@ -5,7 +5,10 @@ Este repositório apresenta um estudo sobre a conversão de um script contendo u
 
 O repositório está estruturado da seguinte maneira:
 
-- **API**: Módulo que utiliza o modelo de aprendizado treinado.
+- **index.html**: Arquivo HTML utilizado como template para o frontend da aplicação. Responsável pela apresentação visual da classificação de frescor de carne.
+- **app.py**: Arquivo principal da aplicação Flask. Contém a lógica para integrar a API de aprendizado de máquina com o frontend.
+- **api.py**: Implementação da API Flask que expõe as funcionalidades do algoritmo de aprendizado de máquina para classificação de carne.
+- **classificacao_de_carne_random.pkl**: Arquivo contendo o modelo de aprendizado de máquina treinado, utilizado pela API para realizar a classificação de frescor de carne.
 
 ## Citação do Artigo publicado no Latino Science 2023
 
