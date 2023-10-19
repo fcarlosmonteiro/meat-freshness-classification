@@ -1,29 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classificação de Frescor da Carne</title>
+
+    <style>
+        body,
+        h1,
+        h2,
+        p,
+        form {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            padding: 20px;
+        }
+
+        h1,
+        h2 {
+            color: #444;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        h2 {
+            margin-top: 30px;
+            font-size: 24px;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            cursor: pointer;
+        }
+
+        button {
+            display: inline-block;
+            background-color: #007BFF;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        img {
+            margin-top: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
+
 <body>
     <h1>Envie uma imagem de carne para análise</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
         <label for="file">Escolha uma imagem (jpg):</label><br>
         <p><input type="file" name="file" accept=".jpg" required></p>
-        <br>
-        <button type="submit">Enviar</button>
     </form>
 
     {% if result %}
-        {% if result.error %}
-            <p>{{ result.error }}</p>
-        {% else %}
-            <h2>Resultado da Classificação:</h2>
-            <p>Imagem Submetida:</p>
-            <img src="{{ url_for('uploaded_file', filename=result.image_filename) }}" alt="Imagem Submetida" width="200">
-            <p>Resultado:</p>
-            <p>{{ result.classification }}</p>
-        {% endif %}
+    {% if result.error %}
+    <p>{{ result.error }}</p>
+    {% else %}
+    <h2>Resultado da Classificação:</h2>
+    <img src="{{ url_for('uploaded_file', filename=result.image_filename) }}" alt="Imagem Submetida" style="width:350px; margin-top:10px; border-radius:8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <p>{{ result.classification }}</p>
     {% endif %}
+    {% endif %}
+
+    <script>
+        document.querySelector('input[type="file"]').addEventListener('change', function (event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                document.getElementById('uploadForm').submit();
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+    </script>
 </body>
+
 </html>
