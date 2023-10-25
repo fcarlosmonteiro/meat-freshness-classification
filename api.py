@@ -42,3 +42,4 @@ def classify_meat(image_path, model):
         result = {'error': 'Erro ao processar a imagem', 'success': False}
     
     return result
+

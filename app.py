@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, jsonify, request, send_from_directory
 from api import UPLOAD_FOLDER, allowed_file, load_and_preprocess_image, classify_meat
 import pickle
 
@@ -26,16 +26,16 @@ def uploaded_file(filename):
 @app.route('/upload', methods=['POST'])
 def upload_media():
     if 'file' not in request.files:
-        return render_template('index.html', result={'error': 'Media não fornecida'})
+        return jsonify({'error': 'Media não fornecida', 'success': False})
 
     file = request.files['file']
     file_path = load_and_preprocess_image(file, app.config['UPLOAD_FOLDER'])
 
     if file_path:
         result = classify_meat(file_path, model)
-        return render_template('index.html', result=result)
+        return jsonify(result)
     else:
-        return render_template('index.html', result={'error': 'Erro ao processar a imagem'})
+        return jsonify({'error': 'Erro ao processar a imagem', 'success': False})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8081)
