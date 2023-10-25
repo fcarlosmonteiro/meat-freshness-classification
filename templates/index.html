@@ -7,6 +7,7 @@
     <title>Classificação de Frescor da Carne</title>
 
     <style>
+        <style>
         body,
         h1,
         h2,
@@ -99,22 +100,40 @@
         <p><input type="file" name="file" accept=".jpg" required></p>
     </form>
 
-    {% if result %}
-    {% if result.error %}
-    <p>{{ result.error }}</p>
-    {% else %}
-    <h2>Resultado da Classificação:</h2>
-    <img src="{{ url_for('uploaded_file', filename=result.image_filename) }}" alt="Imagem Submetida" style="width:350px; margin-top:10px; border-radius:8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-    <p>{{ result.classification }}</p>
-    {% endif %}
-    {% endif %}
+    <div id="resultContainer" style="display: none;">
+        <h2>Resultado da Classificação:</h2>
+        <img id="resultImage" alt="Imagem Submetida" style="width:350px; margin-top:10px; border-radius:8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <p id="resultClassification"></p>
+    </div>
 
     <script>
         document.querySelector('input[type="file"]').addEventListener('change', function (event) {
             const input = event.target;
             if (input.files && input.files[0]) {
-                document.getElementById('uploadForm').submit();
-                reader.readAsDataURL(input.files[0]);
+                const form = document.getElementById('uploadForm');
+                const formData = new FormData(form);
+
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(result => {
+                    // Exibindo o resultado
+                    const resultContainer = document.getElementById('resultContainer');
+                    const resultImage = document.getElementById('resultImage');
+                    const resultClassification = document.getElementById('resultClassification');
+
+                    if (result.error) {
+                        resultContainer.style.display = 'block';
+                        resultClassification.textContent = result.error;
+                    } else {
+                        resultContainer.style.display = 'block';
+                        resultImage.src = `/upload/${result.image_filename}`;
+                        resultClassification.textContent = result.classification;
+                    }
+                })
+                .catch(error => console.error('Erro ao enviar a requisição:', error));
             }
         });
     </script>
