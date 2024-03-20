@@ -14,7 +14,6 @@ O repositório está estruturado da seguinte maneira:
 
 Ao utilizar o projeto em seu trabalho de pesquisa ou estudo acadêmico, por favor, faça referência ao artigo que apresenta o projeto:
 
-link: https://link-a-ser-inserido
-
+link: https://sol.sbc.org.br/index.php/latinoware/article/view/26093/25916
 Balsanello, Vitor; and Souza, Francisco; . "Adaptação, Desenvolvimento e Implantação de uma API para Classificação de Qualidade de Carne com Aprendizado de Máquina: Um Relato de Experiência." In: Anais do XX Congresso Latino-Americano de Software Livre e Tecnologias Abertas, 2023.
 
