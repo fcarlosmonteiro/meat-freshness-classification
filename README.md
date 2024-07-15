@@ -1,4 +1,3 @@
-```markdown
 # Meat Freshness Classification
 
 Este repositório apresenta um projeto sobre o desenvolvimento de uma aplicação para classificação de frescor de carne utilizando aprendizado de máquina . O objetivo é demonstrar o processo desenvolvimento, refatoração de um algoritmo já existente, aplicação de padrões de projeto, desenvolvimento de uma API, integração em uma aplicação web usando Flask e, finalmente, o deploy da aplicação.
@@ -49,4 +48,3 @@ Contribuições são bem-vindas! Para contribuir com este projeto, siga estas et
 - **Testes**: Certifique-se de que seu código passa todos os testes existentes e, se possível, adicione novos testes para cobrir suas mudanças.
 
 Agradecemos suas contribuições para melhorar o projeto!
-```
